@@ -35,7 +35,17 @@ jobs:
             set -x
             mkdir -p /home/hieu/CIhieu
             echo 'git clone code neu chua co'
-            #git clone git@github.com:tronghieu0511/todb17_danhsachlop_hieu_copy.git
-            echo 'git pull'
+            cd ~/CIhieu/
+            if [ ! -d todb17_danhsachlop_web ]; then
+              echo 'Chưa có repo -> clone mới'
+              git clone git@github.com:tronghieu0511/todb17_danhsachlop_web.git
+            fi
+            echo 'Đã có repo -> pull update'
+            cd todb17_danhsachlop_web
+            git checkout CIhieu
+            git pull
+
             echo 'compose up'
+            cd ~/CIhieu/todb17_danhsachlop_web
+            NAME=Hieu ./composeup.sh
           "
